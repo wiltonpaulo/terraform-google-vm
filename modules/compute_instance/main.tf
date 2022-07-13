@@ -27,7 +27,6 @@ locals {
   # When no network or subnetwork has been defined, we want to use the settings from
   # the template instead.
   network_interface = length(format("%s%s", var.network, var.subnetwork)) == 0 ? [] : [1]
-  metadata          = var.metadata
 }
 
 ###############
@@ -49,6 +48,7 @@ resource "google_compute_instance_from_template" "compute_instance" {
   name                = var.add_hostname_suffix ? format("%s%s%s", local.hostname, var.hostname_suffix_separator, format("%03d", count.index + 1)) : local.hostname
   project             = local.project_id
   zone                = var.zone == null ? data.google_compute_zones.available.names[count.index % length(data.google_compute_zones.available.names)] : var.zone
+  metadata            = var.metadata
   deletion_protection = var.deletion_protection
 
 
