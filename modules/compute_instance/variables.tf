@@ -39,6 +39,12 @@ variable "add_hostname_suffix" {
   default     = true
 }
 
+variable "metadata" {
+  type        = map(string)
+  description = "Metadata, provided as a map"
+  default     = {}
+}
+   
 variable "static_ips" {
   type        = list(string)
   description = "List of static IPs for VM instances"
