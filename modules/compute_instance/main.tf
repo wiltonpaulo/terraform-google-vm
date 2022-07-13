@@ -27,6 +27,7 @@ locals {
   # When no network or subnetwork has been defined, we want to use the settings from
   # the template instead.
   network_interface = length(format("%s%s", var.network, var.subnetwork)) == 0 ? [] : [1]
+  metadata          = var.metadata
 }
 
 ###############
